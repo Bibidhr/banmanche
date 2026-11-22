@@ -34,35 +34,36 @@ export default function AboutPage({ setActivePage }) {
     <div className="w-full min-h-screen bg-[#FAF8F5] text-obsidian-950 relative overflow-hidden pb-32">
       
       {/* ========================================================================= */}
-      {/* 1. HERO BANNER: FULL-WIDTH ATMOSPHERIC HEADER (CLEAR & VIBRANT)           */}
+      {/* 1. HERO BANNER: LOWERED, NATURAL PIXELS & ZERO ZOOM DEGRADATION           */}
       {/* ========================================================================= */}
-      <section className="relative w-full h-[54vh] sm:h-[60vh] min-h-[460px] max-h-[620px] flex flex-col justify-end overflow-hidden bg-obsidian-950">
-        
-        {/* Full-bleed background image with clear, natural courtyard daylight */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/outdoor.jpg"
-            alt="Sunlit open-air courtyard with patio umbrellas and brick pavers at Banmanche"
-            className="w-full h-full object-cover object-[center_18%]"
-          />
-          {/* Subtle top scrim for navbar legibility without dimming the photo */}
-          <div className="absolute top-0 left-0 right-0 h-36 bg-gradient-to-b from-black/75 via-black/25 to-transparent pointer-events-none" />
-          {/* Subtle bottom scrim behind the title text */}
-          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-black/85 via-black/35 to-transparent pointer-events-none" />
-        </div>
+      <section className="w-full pt-28 sm:pt-32 pb-4 px-4 sm:px-8 lg:px-12">
+        <div className="max-w-6xl mx-auto">
+          <div className="relative w-full h-[400px] sm:h-[480px] lg:h-[540px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg border border-obsidian-200/70 bg-obsidian-950">
+            
+            {/* Natural resolution image (2200x2500 high-DPI asset), framed lower to capture courtyard seating */}
+            <img
+              src="/outdoor.jpg"
+              alt="Sunlit open-air courtyard with patio umbrellas and brick pavers at Banmanche"
+              className="w-full h-full object-cover object-[center_50%]"
+            />
+            
+            {/* Subtle bottom gradient to protect text contrast without dimming courtyard daylight */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
 
-        {/* Header Stack Inside the Picture (aligned left, matching Vinoliva reference) */}
-        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-10 lg:px-14 pb-10 sm:pb-14">
-          <div className="space-y-2 text-left">
-            <span className="font-mono text-xs sm:text-sm uppercase tracking-[0.25em] text-sand-200 font-semibold drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)] block">
-              BANMANCHE – THE HIMALAYAN COURTYARD
-            </span>
-            <h1 className="font-display text-5xl sm:text-7xl font-bold tracking-tight text-white uppercase leading-none drop-shadow-[0_3px_10px_rgba(0,0,0,0.9)]">
-              ABOUT US
-            </h1>
+            {/* Header Stack Inside the Picture (aligned bottom-left) */}
+            <div className="absolute bottom-8 left-6 sm:bottom-12 sm:left-10 lg:left-12 right-6 z-10">
+              <div className="space-y-2 text-left">
+                <span className="font-mono text-xs sm:text-sm uppercase tracking-[0.25em] text-sand-200 font-semibold drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)] block">
+                  BANMANCHE – THE HIMALAYAN COURTYARD
+                </span>
+                <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white uppercase leading-none drop-shadow-[0_3px_10px_rgba(0,0,0,0.9)]">
+                  ABOUT US
+                </h1>
+              </div>
+            </div>
+
           </div>
         </div>
-
       </section>
 
       {/* ========================================================================= */}
