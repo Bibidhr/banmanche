@@ -1,8 +1,20 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Sparkles, Utensils, Eye } from 'lucide-react';
 
-export default function MenuPage() {
-  // Complete authentic menu from TripAdvisor & BanManche's kitchen
+export default function MenuPage({ onOpenDish, tray = [], onAddToTray, setActivePage }) {
+  const [hoveredDish, setHoveredDish] = useState(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  // Complete authentic menu with high-resolution food catalog imagery
   const starters = [
     {
       id: "starters-1",
@@ -14,7 +26,7 @@ export default function MenuPage() {
       dietary: "non-veg",
       spicyLevel: 2,
       isSignature: true,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLdhgoRwqEBzSkb7Hye6G6_SJ_XEzg_3m6pKiFJB2UtXkdGdA0RmKmfbZOmSk5a_4daY9Ey3iQkeJgIMwK2CZidKko5JXXIdxzDkn2yt1vZUuAZcLG5wR39Lu5IUi2drlWNkwUj-urLD3yU=s1600"
+      image: "/food-catalog/kothey-momo.jpg"
     },
     {
       id: "starters-2",
@@ -26,7 +38,7 @@ export default function MenuPage() {
       dietary: "non-veg",
       spicyLevel: 1,
       isSignature: false,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLctCctpCRI-uGoVepxgPJS6CwXA8UAkPJoRK__FOLu8Eym2yTBxoVCMysmWsen7AdlcX6_4Od_LG3B3sImSZa8oN5Sp6--Lyy_7WTAFYIrg0pU4lc1-jCq3IK9NZFiAJcQvgmipTcgZfIs=s1600"
+      image: "/food-catalog/mokthuk-soup.jpg"
     },
     {
       id: "starters-3",
@@ -38,7 +50,7 @@ export default function MenuPage() {
       dietary: "veg",
       spicyLevel: 1,
       isSignature: true,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLfKg1ajhjBQyR0L9SdB3H2VtRK7ocIRA3BPfy111filN7BIekmYevTsLfvQM4cT5IQYIPDOvoDTiplHXkCE2On-X8j72KHFD0_IAs409HfG6IxjSpeTBNVZHkpluKW-kPitIih4WJsclAQ=s1600"
+      image: "/food-catalog/datshi-crostini.jpg"
     },
     {
       id: "starters-4",
@@ -50,7 +62,7 @@ export default function MenuPage() {
       dietary: "non-veg",
       spicyLevel: 2,
       isSignature: false,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLdhgoRwqEBzSkb7Hye6G6_SJ_XEzg_3m6pKiFJB2UtXkdGdA0RmKmfbZOmSk5a_4daY9Ey3iQkeJgIMwK2CZidKko5JXXIdxzDkn2yt1vZUuAZcLG5wR39Lu5IUi2drlWNkwUj-urLD3yU=s1600"
+      image: "/food-catalog/shapalay.jpg"
     },
     {
       id: "starters-5",
@@ -62,19 +74,19 @@ export default function MenuPage() {
       dietary: "non-veg",
       spicyLevel: 1,
       isSignature: false,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLeTljpP-uXJwqRCcswLwd_yl6m6kFVqee-Iw3BEh4YCWwZ_lIuNYXlI9TjlefXxt462yfk_RN1ZM8yIyJNm3hfYAsD0Qw-xahKbgQZ3USq3iG2WZLEmj8yixeLEkwYY0cEqappdFiQ7IzVa=s1600"
+      image: "/food-catalog/jadoh-rice.jpg"
     },
     {
       id: "starters-6",
-      name: "Alu Dum & Wai Wai Sadeko",
-      nepaliName: "आलु दम र चाउचाउ साधेको",
-      description: "Spiced Kathmandu street-style tempered baby potatoes and crunchy noodles tossed in raw mustard oil, fresh green chili, and lemon juice",
-      price: 450,
+      name: "Handcrafted Steamed Momos",
+      nepaliName: "हाते बाफिएको मोमो",
+      description: "Traditional juicy steamed dumplings pleated fresh every morning with roasted timmur-sesame dipping sauce",
+      price: 600,
       region: "Kathmandu Valley",
-      dietary: "veg",
-      spicyLevel: 2,
+      dietary: "non-veg",
+      spicyLevel: 1,
       isSignature: false,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLdhgoRwqEBzSkb7Hye6G6_SJ_XEzg_3m6pKiFJB2UtXkdGdA0RmKmfbZOmSk5a_4daY9Ey3iQkeJgIMwK2CZidKko5JXXIdxzDkn2yt1vZUuAZcLG5wR39Lu5IUi2drlWNkwUj-urLD3yU=s1600"
+      image: "/food-catalog/steamed-momos.jpg"
     }
   ];
 
@@ -89,7 +101,7 @@ export default function MenuPage() {
       dietary: "non-veg",
       spicyLevel: 3,
       isSignature: true,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLeTljpP-uXJwqRCcswLwd_yl6m6kFVqee-Iw3BEh4YCWwZ_lIuNYXlI9TjlefXxt462yfk_RN1ZM8yIyJNm3hfYAsD0Qw-xahKbgQZ3USq3iG2WZLEmj8yixeLEkwYY0cEqappdFiQ7IzVa=s1600"
+      image: "/food-catalog/naga-pork.jpg"
     },
     {
       id: "mains-2",
@@ -101,7 +113,7 @@ export default function MenuPage() {
       dietary: "veg",
       spicyLevel: 3,
       isSignature: true,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLfKg1ajhjBQyR0L9SdB3H2VtRK7ocIRA3BPfy111filN7BIekmYevTsLfvQM4cT5IQYIPDOvoDTiplHXkCE2On-X8j72KHFD0_IAs409HfG6IxjSpeTBNVZHkpluKW-kPitIih4WJsclAQ=s1600"
+      image: "/food-catalog/tingmo-datshi.jpg"
     },
     {
       id: "mains-3",
@@ -113,7 +125,7 @@ export default function MenuPage() {
       dietary: "non-veg",
       spicyLevel: 2,
       isSignature: true,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLeTljpP-uXJwqRCcswLwd_yl6m6kFVqee-Iw3BEh4YCWwZ_lIuNYXlI9TjlefXxt462yfk_RN1ZM8yIyJNm3hfYAsD0Qw-xahKbgQZ3USq3iG2WZLEmj8yixeLEkwYY0cEqappdFiQ7IzVa=s1600"
+      image: "/food-catalog/courtyard-thali.jpg"
     },
     {
       id: "mains-4",
@@ -125,31 +137,31 @@ export default function MenuPage() {
       dietary: "non-veg",
       spicyLevel: 2,
       isSignature: true,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLeTljpP-uXJwqRCcswLwd_yl6m6kFVqee-Iw3BEh4YCWwZ_lIuNYXlI9TjlefXxt462yfk_RN1ZM8yIyJNm3hfYAsD0Qw-xahKbgQZ3USq3iG2WZLEmj8yixeLEkwYY0cEqappdFiQ7IzVa=s1600"
+      image: "/food-catalog/jadoh-rice.jpg"
     },
     {
       id: "mains-5",
       name: "Slow-Simmered Himalayan Mutton",
-      nepaliName: "हिलालयन खसीको मासु",
+      nepaliName: "हिमालयन खसीको मासु",
       description: "Free-range mountain mutton slow-simmered for 5 hours over sal wood coals with whole shallots, ginger, garlic, and wild Dolpa timmur peppercorns",
       price: 1650,
       region: "Dolpa & Mustang",
       dietary: "non-veg",
       spicyLevel: 2,
       isSignature: false,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLeTljpP-uXJwqRCcswLwd_yl6m6kFVqee-Iw3BEh4YCWwZ_lIuNYXlI9TjlefXxt462yfk_RN1ZM8yIyJNm3hfYAsD0Qw-xahKbgQZ3USq3iG2WZLEmj8yixeLEkwYY0cEqappdFiQ7IzVa=s1600"
+      image: "/food-catalog/slow-cooked-mutton.jpg"
     },
     {
       id: "mains-6",
-      name: "Fire-Roasted Mountain Trout",
-      nepaliName: "आगोमा पोलेको ट्राउट माछा",
-      description: "Whole fresh Himalayan river trout grilled over open wood coals, basted with mustard oil, fresh lemon, crushed wild coriander, and smoked rock salt",
-      price: 1750,
-      region: "Langtang & Rasuwa",
+      name: "Wood-Charred Himalayan Sekuwa",
+      nepaliName: "आगोमा पोलेको सेकुवा",
+      description: "Tender spiced mountain meat skewers grilled over live cured sal hardwood coals, basted with mustard oil, fresh lemon, crushed wild herbs, and smoked rock salt",
+      price: 1100,
+      region: "Eastern Nepal",
       dietary: "non-veg",
-      spicyLevel: 1,
+      spicyLevel: 2,
       isSignature: false,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLctCctpCRI-uGoVepxgPJS6CwXA8UAkPJoRK__FOLu8Eym2yTBxoVCMysmWsen7AdlcX6_4Od_LG3B3sImSZa8oN5Sp6--Lyy_7WTAFYIrg0pU4lc1-jCq3IK9NZFiAJcQvgmipTcgZfIs=s1600"
+      image: "/food-catalog/himalayan-sekuwa.jpg"
     },
     {
       id: "mains-7",
@@ -161,7 +173,7 @@ export default function MenuPage() {
       dietary: "veg",
       spicyLevel: 2,
       isSignature: false,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLfKg1ajhjBQyR0L9SdB3H2VtRK7ocIRA3BPfy111filN7BIekmYevTsLfvQM4cT5IQYIPDOvoDTiplHXkCE2On-X8j72KHFD0_IAs409HfG6IxjSpeTBNVZHkpluKW-kPitIih4WJsclAQ=s1600"
+      image: "/food-catalog/tingmo-datshi.jpg"
     }
   ];
 
@@ -171,12 +183,12 @@ export default function MenuPage() {
       name: "Himalayan Chhurpi & Saffron Cheesecake",
       nepaliName: "छुर्पी र केसर चीजकेक",
       description: "Velvety baked cheesecake balanced with artisanal soft chhurpi curd, Kashmiri saffron swirl, and buckwheat biscuit crust",
-      price: 600,
+      price: 650,
       region: "Nepal & Tibet",
       dietary: "veg",
       spicyLevel: 0,
       isSignature: true,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLdEWpt5YuYtIByQ3WWZOXkrJnaywVeJnlOc-OJzY9m6MQdd_utopdOycgW9CYtKk7JYOFJWFtc23kI7bv9okpvP7Q4OVcGqlTRhZiFHcbSJBT2kRXle9KIxrmys-rhT8zHpPvJLTwIfGj7O=s1600"
+      image: "/food-catalog/chhurpi-cheesecake.jpg"
     },
     {
       id: "dessert-2",
@@ -188,7 +200,7 @@ export default function MenuPage() {
       dietary: "veg",
       spicyLevel: 0,
       isSignature: false,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLdEWpt5YuYtIByQ3WWZOXkrJnaywVeJnlOc-OJzY9m6MQdd_utopdOycgW9CYtKk7JYOFJWFtc23kI7bv9okpvP7Q4OVcGqlTRhZiFHcbSJBT2kRXle9KIxrmys-rhT8zHpPvJLTwIfGj7O=s1600"
+      image: "/food-catalog/buckwheat-tartlet.jpg"
     },
     {
       id: "dessert-3",
@@ -200,7 +212,7 @@ export default function MenuPage() {
       dietary: "veg",
       spicyLevel: 0,
       isSignature: false,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLdEWpt5YuYtIByQ3WWZOXkrJnaywVeJnlOc-OJzY9m6MQdd_utopdOycgW9CYtKk7JYOFJWFtc23kI7bv9okpvP7Q4OVcGqlTRhZiFHcbSJBT2kRXle9KIxrmys-rhT8zHpPvJLTwIfGj7O=s1600"
+      image: "/food-catalog/buckwheat-tartlet.jpg"
     }
   ];
 
@@ -215,7 +227,7 @@ export default function MenuPage() {
       dietary: "veg",
       spicyLevel: 1,
       isSignature: true,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLc97hv4vF-cvLVr4WNJRnMuAxfHQEgE9f-BsjrknimH0aPOsLO1qdv8OYfpNUWLlm17pHrTHaqlqtU2BZ9de-uEdvpVfiXLBJntVNBX5ZBa3iFvCIsv5v5ZTS1Psd3lkVDskJQEe81NXsvL=s1600"
+      image: "/food-catalog/arak-cocktail.jpg"
     },
     {
       id: "drink-2",
@@ -227,7 +239,7 @@ export default function MenuPage() {
       dietary: "non-veg",
       spicyLevel: 0,
       isSignature: true,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLc97hv4vF-cvLVr4WNJRnMuAxfHQEgE9f-BsjrknimH0aPOsLO1qdv8OYfpNUWLlm17pHrTHaqlqtU2BZ9de-uEdvpVfiXLBJntVNBX5ZBa3iFvCIsv5v5ZTS1Psd3lkVDskJQEe81NXsvL=s1600"
+      image: "/food-catalog/arak-cocktail.jpg"
     },
     {
       id: "drink-3",
@@ -239,7 +251,7 @@ export default function MenuPage() {
       dietary: "veg",
       spicyLevel: 0,
       isSignature: true,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLc97hv4vF-cvLVr4WNJRnMuAxfHQEgE9f-BsjrknimH0aPOsLO1qdv8OYfpNUWLlm17pHrTHaqlqtU2BZ9de-uEdvpVfiXLBJntVNBX5ZBa3iFvCIsv5v5ZTS1Psd3lkVDskJQEe81NXsvL=s1600"
+      image: "/food-catalog/arak-cocktail.jpg"
     },
     {
       id: "drink-4",
@@ -249,72 +261,48 @@ export default function MenuPage() {
       price: 750,
       region: "Himalayan Foothills",
       dietary: "veg",
-      spicyLevel: 0,
-      isSignature: false,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLc97hv4vF-cvLVr4WNJRnMuAxfHQEgE9f-BsjrknimH0aPOsLO1qdv8OYfpNUWLlm17pHrTHaqlqtU2BZ9de-uEdvpVfiXLBJntVNBX5ZBa3iFvCIsv5v5ZTS1Psd3lkVDskJQEe81NXsvL=s1600"
-    },
-    {
-      id: "drink-5",
-      name: "Himalayan Rhododendron Spritz",
-      nepaliName: "लालीगुराँस स्प्रिट्ज",
-      description: "Wild laligurans flower liqueur, prosecco, crisp sparkling soda, and a dash of mountain bitters garnished with edible botanicals",
-      price: 800,
-      region: "Eastern Nepal",
-      dietary: "veg",
-      spicyLevel: 0,
-      isSignature: false,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLc97hv4vF-cvLVr4WNJRnMuAxfHQEgE9f-BsjrknimH0aPOsLO1qdv8OYfpNUWLlm17pHrTHaqlqtU2BZ9de-uEdvpVfiXLBJntVNBX5ZBa3iFvCIsv5v5ZTS1Psd3lkVDskJQEe81NXsvL=s1600"
+      spicyLevel: 1,
+      isSignature: true,
+      image: "/food-catalog/arak-cocktail.jpg"
     }
   ];
 
-  const hotDrinks = [
+  const teas = [
     {
-      id: "hot-1",
+      id: "tea-1",
       name: "Traditional Tibetan Butter Tea (Po Cha)",
-      nepaliName: "परम्परागत तिब्बती बटर चिया (पो छा)",
-      description: "Aged brick tea churned with fresh yak butter and Himalayan rock salt in a traditional wooden dongmo cylinder",
+      nepaliName: "परम्परागत पो छा (बटर टी)",
+      description: "Authentic highland brick tea churned with fresh yak butter and Himalayan rock salt. Rich, savory, and restorative",
       price: 350,
-      region: "Tibet & Upper Himalayas",
+      region: "High Himalayas",
       dietary: "veg",
       spicyLevel: 0,
       isSignature: true,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLc97hv4vF-cvLVr4WNJRnMuAxfHQEgE9f-BsjrknimH0aPOsLO1qdv8OYfpNUWLlm17pHrTHaqlqtU2BZ9de-uEdvpVfiXLBJntVNBX5ZBa3iFvCIsv5v5ZTS1Psd3lkVDskJQEe81NXsvL=s1600"
+      image: "/food-catalog/po-cha-tea.jpg"
     },
     {
-      id: "hot-2",
+      id: "tea-2",
       name: "Ilam First-Flush Orthodox Black Tea",
       nepaliName: "इलाम पहिलो टिपाइ अर्थोडक्स चिया",
-      description: "Hand-picked high-elevation whole leaf black tea from the mist-covered hills of Ilam, featuring floral muscatel notes",
-      price: 320,
-      region: "Ilam, Eastern Nepal",
+      description: "Hand-picked tender whole leaves from certified organic gardens in Ilam. Delicate floral muscatel notes with honeyed sweetness",
+      price: 400,
+      region: "Ilam Eastern Nepal",
       dietary: "veg",
       spicyLevel: 0,
       isSignature: false,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLc97hv4vF-cvLVr4WNJRnMuAxfHQEgE9f-BsjrknimH0aPOsLO1qdv8OYfpNUWLlm17pHrTHaqlqtU2BZ9de-uEdvpVfiXLBJntVNBX5ZBa3iFvCIsv5v5ZTS1Psd3lkVDskJQEe81NXsvL=s1600"
+      image: "/food-catalog/himalayan-herbal-tea.jpg"
     },
     {
-      id: "hot-3",
+      id: "tea-3",
       name: "Wild Mint & Lemongrass Mountain Infusion",
-      nepaliName: "जङ्गली पुदिना र लेमनग्रास इन्फ्युजन",
-      description: "Naturally caffeine-free herbal brew of foraged wild mountain mint, crushed dried lemongrass, and fresh ginger root",
-      price: 280,
-      region: "Kathmandu Valley Hills",
+      nepaliName: "जङ्गली पुदिना र कागती घाँस",
+      description: "Caffeine-free soothing blend of sun-dried mountain spearmint, fresh lemongrass stalks, and crushed ginger root",
+      price: 380,
+      region: "Himalayan Foothills",
       dietary: "veg",
       spicyLevel: 0,
       isSignature: false,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLc97hv4vF-cvLVr4WNJRnMuAxfHQEgE9f-BsjrknimH0aPOsLO1qdv8OYfpNUWLlm17pHrTHaqlqtU2BZ9de-uEdvpVfiXLBJntVNBX5ZBa3iFvCIsv5v5ZTS1Psd3lkVDskJQEe81NXsvL=s1600"
-    },
-    {
-      id: "hot-4",
-      name: "Himalayan Masala Milk Tea",
-      nepaliName: "मसालेदार दुध चिया",
-      description: "Rich whole milk simmered with organic ginger, crushed green cardamom, black pepper, and premium CTC tea leaves",
-      price: 300,
-      region: "Nepal",
-      dietary: "veg",
-      spicyLevel: 0,
-      isSignature: false,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLc97hv4vF-cvLVr4WNJRnMuAxfHQEgE9f-BsjrknimH0aPOsLO1qdv8OYfpNUWLlm17pHrTHaqlqtU2BZ9de-uEdvpVfiXLBJntVNBX5ZBa3iFvCIsv5v5ZTS1Psd3lkVDskJQEe81NXsvL=s1600"
+      image: "/food-catalog/himalayan-herbal-tea.jpg"
     }
   ];
 
@@ -329,7 +317,7 @@ export default function MenuPage() {
       dietary: "veg",
       spicyLevel: 0,
       isSignature: true,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLc97hv4vF-cvLVr4WNJRnMuAxfHQEgE9f-BsjrknimH0aPOsLO1qdv8OYfpNUWLlm17pHrTHaqlqtU2BZ9de-uEdvpVfiXLBJntVNBX5ZBa3iFvCIsv5v5ZTS1Psd3lkVDskJQEe81NXsvL=s1600"
+      image: "/food-catalog/arak-cocktail.jpg"
     },
     {
       id: "wine-2",
@@ -341,7 +329,7 @@ export default function MenuPage() {
       dietary: "veg",
       spicyLevel: 0,
       isSignature: false,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLc97hv4vF-cvLVr4WNJRnMuAxfHQEgE9f-BsjrknimH0aPOsLO1qdv8OYfpNUWLlm17pHrTHaqlqtU2BZ9de-uEdvpVfiXLBJntVNBX5ZBa3iFvCIsv5v5ZTS1Psd3lkVDskJQEe81NXsvL=s1600"
+      image: "/food-catalog/arak-cocktail.jpg"
     },
     {
       id: "wine-3",
@@ -353,11 +341,11 @@ export default function MenuPage() {
       dietary: "veg",
       spicyLevel: 0,
       isSignature: false,
-      image: "https://lh3.googleusercontent.com/grass-cs/AABkmLc97hv4vF-cvLVr4WNJRnMuAxfHQEgE9f-BsjrknimH0aPOsLO1qdv8OYfpNUWLlm17pHrTHaqlqtU2BZ9de-uEdvpVfiXLBJntVNBX5ZBa3iFvCIsv5v5ZTS1Psd3lkVDskJQEe81NXsvL=s1600"
+      image: "/food-catalog/arak-cocktail.jpg"
     }
   ];
 
-  // Minimalist Chéz Caroline menu item: Name + Price with full left-to-right alignment and elegant subtle border
+  // Minimalist Chéz Caroline menu item: Name + Price with floating on-hover image preview
   const renderItem = (dish) => (
     <motion.div 
       key={dish.id} 
@@ -365,41 +353,100 @@ export default function MenuPage() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-      className="py-2.5 px-3 rounded-lg hover:bg-black/[0.02] transition-colors select-none flex items-baseline justify-between gap-4 border-b border-obsidian-200/50"
+      onMouseEnter={() => setHoveredDish(dish)}
+      onMouseLeave={() => setHoveredDish(null)}
+      onClick={() => onOpenDish && onOpenDish(dish)}
+      className="group relative py-3 px-3.5 rounded-xl hover:bg-black/[0.03] transition-all cursor-pointer flex items-baseline justify-between gap-4 border-b border-obsidian-200/50"
     >
-      <span className="font-menu text-xl sm:text-2xl text-obsidian-950 font-normal tracking-tight">
-        {dish.name}
-      </span>
-      <span className="font-sans text-base sm:text-lg font-light text-obsidian-600 tracking-wide shrink-0">
-        — Rs.{dish.price.toLocaleString()}
-      </span>
+      <div className="flex items-baseline gap-2.5 min-w-0">
+        <span className="font-menu text-xl sm:text-2xl text-obsidian-950 font-normal tracking-tight group-hover:text-terracotta-600 transition-colors truncate">
+          {dish.name}
+        </span>
+        {dish.isSignature && (
+          <span className="shrink-0 w-1.5 h-1.5 rounded-full bg-terracotta-500" title="Signature Dish" />
+        )}
+      </div>
+
+      <div className="flex items-baseline gap-3 shrink-0">
+        <span className="font-sans text-base sm:text-lg font-light text-obsidian-600 tracking-wide group-hover:text-obsidian-950 transition-colors">
+          — Rs.{dish.price.toLocaleString()}
+        </span>
+      </div>
     </motion.div>
   );
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] pt-32 pb-32 px-6 sm:px-10 lg:px-14 text-obsidian-950">
+    <div className="min-h-screen bg-[#FAF8F5] pt-32 pb-32 px-6 sm:px-10 lg:px-14 text-obsidian-950 relative">
+      
+      {/* ========================================================================= */}
+      {/* FLOATING CURSOR IMAGE PREVIEW ON HOVER                                    */}
+      {/* ========================================================================= */}
+      <AnimatePresence>
+        {hoveredDish && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 10 }}
+            animate={{ 
+              opacity: 1, 
+              scale: 1,
+              x: Math.min(mousePos.x + 28, window.innerWidth - 300),
+              y: Math.min(Math.max(mousePos.y - 140, 80), window.innerHeight - 340)
+            }}
+            exit={{ opacity: 0, scale: 0.9, y: 10 }}
+            transition={{ type: "spring", stiffness: 400, damping: 28 }}
+            className="fixed pointer-events-none z-50 hidden lg:flex flex-col bg-white p-3.5 rounded-2xl shadow-2xl border border-obsidian-200/80 w-64"
+          >
+            {/* White blended image */}
+            <div className="w-full aspect-square rounded-xl bg-white overflow-hidden flex items-center justify-center p-2 mb-2">
+              <img 
+                src={hoveredDish.image} 
+                alt={hoveredDish.name} 
+                className="w-full h-full object-contain"
+              />
+            </div>
+            
+            <div className="text-center w-full px-1 space-y-1">
+              <h4 className="font-display font-medium text-sm text-obsidian-950 truncate">
+                {hoveredDish.name}
+              </h4>
+              {hoveredDish.nepaliName && (
+                <p className="text-[11px] text-obsidian-500 font-sans tracking-wide">
+                  {hoveredDish.nepaliName}
+                </p>
+              )}
+              <p className="text-[11px] text-obsidian-600 font-normal line-clamp-2 leading-relaxed pt-0.5">
+                {hoveredDish.description}
+              </p>
+              <div className="pt-2 border-t border-obsidian-100 flex items-center justify-between text-xs font-mono">
+                <span className="text-[10px] text-terracotta-700 bg-terracotta-50 px-2 py-0.5 rounded-full font-medium">
+                  {hoveredDish.region}
+                </span>
+                <span className="font-bold text-obsidian-900">
+                  Rs.{hoveredDish.price.toLocaleString()}
+                </span>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="w-full max-w-6xl mx-auto space-y-16">
         
         {/* ========================================================================= */}
-        {/* EXACT CHÉZ CAROLINE HEADER: JUST 'MENU' & 'ALL RATES ARE TAX INCLUDED'    */}
+        {/* CHÉZ CAROLINE HEADER: JUST 'MENU' & 'ALL RATES ARE TAX INCLUDED'          */}
         {/* ========================================================================= */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center space-y-1.5 pb-6 border-b border-obsidian-200/60"
+          className="text-center space-y-2 pb-6 border-b border-obsidian-200/60"
         >
           <h1 className="font-menu text-4xl sm:text-6xl font-normal text-obsidian-950 tracking-tight">
             Menu
           </h1>
           <p className="text-xs sm:text-sm font-sans text-obsidian-500 font-normal tracking-wide">
-            All rates are Tax included
+            All rates are Tax included • Hover over any item to view its plate
           </p>
         </motion.div>
-
-        {/* ========================================================================= */}
-        {/* ONE-SCROLL CONTINUOUS SECTIONS (STARTERS -> MAINS -> DESSERTS -> DRINKS)   */}
-        {/* ========================================================================= */}
 
         {/* 1. STARTERS */}
         <motion.section
@@ -423,7 +470,7 @@ export default function MenuPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="space-y-6 pt-6"
+          className="space-y-6"
         >
           <h2 className="font-menu text-2xl sm:text-3xl font-normal text-terracotta-600 text-center tracking-wide">
             Main Courses
@@ -439,7 +486,7 @@ export default function MenuPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="space-y-6 pt-6"
+          className="space-y-6"
         >
           <h2 className="font-menu text-2xl sm:text-3xl font-normal text-terracotta-600 text-center tracking-wide">
             Desserts
@@ -449,55 +496,48 @@ export default function MenuPage() {
           </div>
         </motion.section>
 
-        {/* 4. DRINKS & COCKTAILS */}
+        {/* 4. COCKTAILS */}
         <motion.section
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="space-y-6 pt-6"
+          className="space-y-6"
         >
-          <div className="flex items-center justify-center gap-2.5">
-            <img
-              src="/arak-logo.png"
-              alt="ARAK"
-              className="h-6 sm:h-7 w-auto object-contain"
-            />
-            <h2 className="font-menu text-2xl sm:text-3xl font-normal text-terracotta-600 tracking-wide">
-              Bar Cocktails & Spirits
-            </h2>
-          </div>
+          <h2 className="font-menu text-2xl sm:text-3xl font-normal text-terracotta-600 text-center tracking-wide">
+            Crafted Cocktails & Arak Spirits
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-2.5">
             {cocktails.map(renderItem)}
           </div>
         </motion.section>
 
-        {/* 5. HOT DRINKS & TEAS */}
+        {/* 5. TEAS */}
         <motion.section
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="space-y-6 pt-6"
+          className="space-y-6"
         >
           <h2 className="font-menu text-2xl sm:text-3xl font-normal text-terracotta-600 text-center tracking-wide">
-            Hot drinks & Teas
+            Mountain Teas & Infusions
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-2.5">
-            {hotDrinks.map(renderItem)}
+            {teas.map(renderItem)}
           </div>
         </motion.section>
 
-        {/* 6. WINE & CELLAR */}
+        {/* 6. WINES */}
         <motion.section
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="space-y-6 pt-6"
+          className="space-y-6"
         >
           <h2 className="font-menu text-2xl sm:text-3xl font-normal text-terracotta-600 text-center tracking-wide">
-            Wine & Cellar
+            Wines & Bubbles
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-2.5">
             {wines.map(renderItem)}

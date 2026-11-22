@@ -117,6 +117,7 @@ export default function App() {
             <GalleryPage
               galleryItems={galleryItems}
               onOpenLightbox={(item) => setLightboxItem(item)}
+              setActivePage={setActivePage}
             />
           )}
 
