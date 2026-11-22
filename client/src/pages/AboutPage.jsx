@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, Send, Check, Mountain, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { MapPin, Phone, Mail, Clock, Send, Check } from 'lucide-react';
 
 export default function AboutPage({ setActivePage }) {
-  const [selectedTerroir, setSelectedTerroir] = useState(0);
-
   const [contactForm, setContactForm] = useState({
     name: '',
     email: '',
@@ -14,45 +12,6 @@ export default function AboutPage({ setActivePage }) {
   });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-
-  const terroirs = [
-    {
-      id: "dolpa",
-      region: "Dolpa Ridge",
-      altitude: "3,200m ASL",
-      element: "Wild Timmur Pepper & Rock Salt",
-      description: "Harvested from thorny mountain shrubs clinging to dry rocky screes above the treeline. Imparts a sharp citrus aroma and a gentle, electric floral numbness essential to our sekuwa and charred tomato achars.",
-      profile: "Grapefruit zest, crushed pine, electric warmth",
-      dishPairing: "Wood-Charred Himalayan Sekuwa & Fire Achar"
-    },
-    {
-      id: "mustang",
-      region: "Mustang Valley",
-      altitude: "2,800m ASL",
-      element: "Tartary Buckwheat & Wild Honey",
-      description: "Grown in high wind-swept Himalayan plateaus irrigated by glacial snowmelt. Ground into dark, rustic nutty flour for hand-pulled mountain crepes, tartlets, and paired with unfiltered amber forest honey.",
-      profile: "Toasted hazelnut, deep earthy malt, wildflower sweetness",
-      dishPairing: "Wild Honey & Buckwheat Tartlet"
-    },
-    {
-      id: "ilam",
-      region: "Ilam Hills",
-      altitude: "1,800m ASL",
-      element: "First-Flush Orthodox Black Tea",
-      description: "Hand-plucked tender leaf buds misted by afternoon cloud banks in Eastern Nepal. Certified organic, whole-leaf orthodox teas brewed in clear glass and churned into rich Tibetan Po Cha.",
-      profile: "Muscatel grape, fresh alpine mint, creamy mountain ghee",
-      dishPairing: "Traditional Tibetan Po Cha & First-Flush Tea"
-    },
-    {
-      id: "nagaland",
-      region: "Naga Highlands",
-      altitude: "1,400m ASL",
-      element: "Hardwood Oak Curing & Bamboo Shoots",
-      description: "Cured by traditional woodsmoke above domestic hearth fires, then simmered for hours with naturally fermented wild forest bamboo shoots and fiery mountain bird's eye chilies.",
-      profile: "Deep resinous oak smoke, tangy fermented brightness, slow heat",
-      dishPairing: "Naga Smoked Pork in Cast Iron"
-    }
-  ];
 
   const handleContactSubmit = async (e) => {
     e.preventDefault();
@@ -75,30 +34,30 @@ export default function AboutPage({ setActivePage }) {
     <div className="w-full min-h-screen bg-[#FAF8F5] text-obsidian-950 relative overflow-hidden pb-32">
       
       {/* ========================================================================= */}
-      {/* 1. HERO BANNER: FULL-WIDTH ATMOSPHERIC HEADER (VINOLIVA STYLE)             */}
+      {/* 1. HERO BANNER: FULL-WIDTH ATMOSPHERIC HEADER (CLEAR & VIBRANT)           */}
       {/* ========================================================================= */}
-      <section className="relative w-full h-[52vh] min-h-[420px] max-h-[560px] flex flex-col justify-end overflow-hidden bg-obsidian-950">
+      <section className="relative w-full h-[54vh] sm:h-[60vh] min-h-[460px] max-h-[620px] flex flex-col justify-end overflow-hidden bg-obsidian-950">
         
-        {/* Full-bleed background image with dark atmospheric exposure */}
+        {/* Full-bleed background image with clear, natural courtyard daylight */}
         <div className="absolute inset-0 z-0">
           <img
             src="/outdoor.jpg"
             alt="Sunlit open-air courtyard with patio umbrellas and brick pavers at Banmanche"
-            className="w-full h-full object-cover object-[center_60%]"
+            className="w-full h-full object-cover object-[center_18%]"
           />
-          {/* Top gradient for transparent navbar legibility */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/40 to-black/75" />
-          {/* Bottom & Left gradient for header contrast */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent" />
+          {/* Subtle top scrim for navbar legibility without dimming the photo */}
+          <div className="absolute top-0 left-0 right-0 h-36 bg-gradient-to-b from-black/75 via-black/25 to-transparent pointer-events-none" />
+          {/* Subtle bottom scrim behind the title text */}
+          <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-black/85 via-black/35 to-transparent pointer-events-none" />
         </div>
 
         {/* Header Stack Inside the Picture (aligned left, matching Vinoliva reference) */}
-        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-10 lg:px-14 pb-12 sm:pb-16">
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-10 lg:px-14 pb-10 sm:pb-14">
           <div className="space-y-2 text-left">
-            <span className="font-mono text-xs sm:text-sm uppercase tracking-[0.25em] text-sand-200/90 font-medium block">
+            <span className="font-mono text-xs sm:text-sm uppercase tracking-[0.25em] text-sand-200 font-semibold drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)] block">
               BANMANCHE – THE HIMALAYAN COURTYARD
             </span>
-            <h1 className="font-display text-5xl sm:text-7xl font-bold tracking-tight text-white uppercase leading-none drop-shadow-sm">
+            <h1 className="font-display text-5xl sm:text-7xl font-bold tracking-tight text-white uppercase leading-none drop-shadow-[0_3px_10px_rgba(0,0,0,0.9)]">
               ABOUT US
             </h1>
           </div>
@@ -192,115 +151,6 @@ export default function AboutPage({ setActivePage }) {
             <span className="text-terracotta-500">•</span>
             <span>Kathmandu Hearth Sekuwa</span>
           </div>
-
-        </div>
-
-        {/* ========================================================================= */}
-        {/* 3. SURPRISE: THE FOUR MOUNTAIN TERROIRS (INTERACTIVE ELEVATION RITUAL)    */}
-        {/* ========================================================================= */}
-        <div className="border-t border-obsidian-200/80 pt-16 sm:pt-20">
-          
-          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14 space-y-2">
-            <h3 className="font-display text-2xl sm:text-4xl font-light text-obsidian-950 tracking-tight">
-              The Four Highland Terroirs
-            </h3>
-            <p className="text-xs sm:text-sm text-obsidian-600 font-normal leading-relaxed">
-              Explore the altitudes and wild microclimates where our core kitchen harvests originate. Click a region to inspect its terroir.
-            </p>
-          </div>
-
-          {/* Terroir Tab Buttons */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
-            {terroirs.map((t, idx) => {
-              const isSelected = selectedTerroir === idx;
-              return (
-                <button
-                  key={t.id}
-                  onClick={() => setSelectedTerroir(idx)}
-                  className={`p-4 rounded-xl text-left transition-all border cursor-pointer ${
-                    isSelected
-                      ? 'bg-obsidian-950 text-white border-obsidian-950 shadow-sm'
-                      : 'bg-white/80 text-obsidian-800 border-obsidian-200/70 hover:border-obsidian-300 hover:bg-white'
-                  }`}
-                >
-                  <span className={`text-[10px] font-mono uppercase tracking-wider block ${
-                    isSelected ? 'text-sand-300' : 'text-terracotta-600'
-                  }`}>
-                    {t.altitude}
-                  </span>
-                  <strong className="font-display text-sm sm:text-base font-medium block mt-1">
-                    {t.region}
-                  </strong>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Interactive Terroir Card with Rich Detail */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={terroirs[selectedTerroir].id}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className="p-6 sm:p-10 rounded-2xl bg-white border border-obsidian-200/80 shadow-xs grid grid-cols-1 md:grid-cols-12 gap-8 items-center"
-            >
-              <div className="md:col-span-8 space-y-4">
-                <div className="flex items-center gap-3">
-                  <span className="px-2.5 py-0.5 rounded-full text-[11px] font-mono uppercase tracking-wider bg-terracotta-100 text-terracotta-800 font-medium">
-                    {terroirs[selectedTerroir].altitude}
-                  </span>
-                  <span className="font-menu text-lg sm:text-xl text-obsidian-950">
-                    {terroirs[selectedTerroir].element}
-                  </span>
-                </div>
-                
-                <p className="text-xs sm:text-sm text-obsidian-700 leading-relaxed font-normal">
-                  {terroirs[selectedTerroir].description}
-                </p>
-
-                <div className="pt-3 border-t border-obsidian-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
-                  <div>
-                    <span className="text-obsidian-500 font-mono text-[10px] uppercase block">Sensory Profile</span>
-                    <strong className="text-obsidian-900 font-sans font-medium">{terroirs[selectedTerroir].profile}</strong>
-                  </div>
-                  <div>
-                    <span className="text-obsidian-500 font-mono text-[10px] uppercase block">Hearth Pairing</span>
-                    <strong className="text-terracotta-600 font-sans font-medium">{terroirs[selectedTerroir].dishPairing}</strong>
-                  </div>
-                </div>
-              </div>
-
-              <div className="md:col-span-4 border-l border-obsidian-100 pl-0 md:pl-8 space-y-3 text-center md:text-left">
-                <div className="w-12 h-12 rounded-xl bg-sand-50 border border-obsidian-200/60 flex items-center justify-center text-terracotta-600 mx-auto md:mx-0">
-                  <Mountain className="w-6 h-6" />
-                </div>
-                <h4 className="font-display text-base font-medium text-obsidian-950">
-                  Living Mountain Terroir
-                </h4>
-                <p className="text-[11px] text-obsidian-600 leading-relaxed">
-                  We source unadulterated harvests directly from smallholder cooperatives across the Himalayas.
-                </p>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Quick CTA to Full Menu */}
-          {setActivePage && (
-            <div className="mt-12 text-center">
-              <button
-                onClick={() => {
-                  setActivePage('menu');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-terracotta-600 hover:text-terracotta-700 transition-colors cursor-pointer"
-              >
-                <span>Explore Full Menu Dishes on Hover</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          )}
 
         </div>
 
