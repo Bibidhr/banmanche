@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-white text-obsidian-900 antialiased font-sans selection:bg-ochre-500 selection:text-white;
+  }
+}
+
+/* Glassmorphism custom utilities for minimal white theme */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(17, 22, 24, 0.08);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  background: #FFFFFF;
+  border-color: rgba(216, 88, 52, 0.35);
+  box-shadow: 0 14px 34px -10px rgba(216, 88, 52, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(17, 22, 24, 0.1);
+}
+
+.glass-input {
+  background: #FFFFFF;
+  border: 1px solid rgba(17, 22, 24, 0.15);
+  color: #111618;
+}
+
+.glass-input:focus {
+  outline: none;
+  border-color: #D85834;
+  box-shadow: 0 0 0 3px rgba(216, 88, 52, 0.15);
+}
+
+/* Fully blended custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(140, 140, 140, 0.25);
+  border-radius: 9999px;
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(216, 88, 52, 0.6);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(140, 140, 140, 0.25) transparent;
+}
+
+/* Ultra-smooth progressive mask for infinite marquee edges (no card cuts) */
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent 0%, black 80px, black calc(100% - 80px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 80px, black calc(100% - 80px), transparent 100%);
+}
+
+@media (min-width: 640px) {
+  .marquee-mask {
+    mask-image: linear-gradient(to right, transparent 0%, black 160px, black calc(100% - 160px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 160px, black calc(100% - 160px), transparent 100%);
+  }
+}
+
+@media (min-width: 1024px) {
+  .marquee-mask {
+    mask-image: linear-gradient(to right, transparent 0%, black 240px, black calc(100% - 240px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 240px, black calc(100% - 240px), transparent 100%);
+  }
+}
+
+/* Infinite Marquee animations */
+@keyframes marquee-ltr {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0%, 0, 0);
+  }
+}
+
+@keyframes marquee-rtl {
+  0% {
+    transform: translate3d(0%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee-ltr {
+  display: flex;
+  width: max-content;
+  animation: marquee-ltr 95s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-rtl {
+  display: flex;
+  width: max-content;
+  animation: marquee-rtl 95s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-ltr:hover,
+.animate-marquee-rtl:hover {
+  animation-play-state: paused;
+}
