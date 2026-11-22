@@ -30,3 +30,4 @@ Thumbs.db
 # Knowledge graph & scratch
 graphify-out/
 scratch/
+.vercel

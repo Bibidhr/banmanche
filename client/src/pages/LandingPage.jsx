@@ -472,7 +472,7 @@ export default function LandingPage({ setActivePage }) {
         </div>
 
         {/* ROW 2: THE COURTYARD (TEXT LEFT, OUTDOOR PHOTO RIGHT) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[460px] sm:min-h-[540px] lg:min-h-[620px] bg-black">
+        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[460px] sm:min-h-[540px] lg:min-h-[640px] xl:min-h-[720px] bg-black">
           
           {/* Left: Pitch Black, Red Accent Line, Giant Bold THE COURTYARD */}
           <motion.div
@@ -489,11 +489,11 @@ export default function LandingPage({ setActivePage }) {
           </motion.div>
 
           {/* Right: Full-bleed Outdoor Courtyard Photo */}
-          <div className="order-1 lg:order-2 relative w-full h-[380px] sm:h-[480px] lg:h-full min-h-[380px] sm:min-h-[480px] overflow-hidden select-none bg-black">
+          <div className="order-1 lg:order-2 relative w-full h-[400px] sm:h-[500px] lg:h-full min-h-[400px] sm:min-h-[500px] overflow-hidden select-none bg-black">
             <img
               src="/outdoor.jpg"
               alt="The Outdoor Courtyard at Banmanche"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-bottom"
             />
           </div>
 
