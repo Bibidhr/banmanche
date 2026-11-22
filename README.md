@@ -1,5 +1,8 @@
 # BANMANCHE: The Himalayan Courtyard & Arak Bar
 
+🌐 **Live Website:** [https://banmanche-courtyard.vercel.app](https://banmanche-courtyard.vercel.app)  
+📁 **GitHub Repository:** [https://github.com/Bibidhr/banmanche](https://github.com/Bibidhr/banmanche)
+
 A full-stack **MERN** (MongoDB, Express, React, Node.js) web application built for **BANMANCHE: The Himalayan Courtyard** located at Kailashchaur Marg, Dhobichaur, Kathmandu, Nepal.
 
 Researched and built from verified restaurant data, Google Maps (`27.71858° N, 85.321298° E`), TripAdvisor reviews, menus, and courtyard ambiance details.
