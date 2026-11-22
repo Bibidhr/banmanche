@@ -27,7 +27,7 @@ export default function Navbar({ activePage, setActivePage, trayCount = 0 }) {
 
   // Unified rule across ALL pages: Circular at top, stretches to landscape on scroll
   const isCircular = !isScrolled;
-  const isTransparentHero = activePage === 'home' && !isScrolled;
+  const isTransparentHero = (activePage === 'home' || activePage === 'about') && !isScrolled;
 
   const navLinks = [
     { id: 'home', label: 'Home' },
