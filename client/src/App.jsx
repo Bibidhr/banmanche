@@ -128,7 +128,10 @@ export default function App() {
           )}
 
           {activePage === 'about' && (
-            <AboutPage />
+            <AboutPage
+              onOpenDish={(dish) => setSelectedDish(dish)}
+              setActivePage={setActivePage}
+            />
           )}
         </main>
 

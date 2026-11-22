@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Star, Calendar, Clock, Users, MapPin, Sparkles } from 'lucide-react';
+import AboutSection from '../components/AboutSection';
 
-export default function LandingPage({ setActivePage }) {
+export default function LandingPage({ setActivePage, onOpenDish, onAddToTray, menuItems, reviews }) {
   const [quickDate, setQuickDate] = useState('2026-11-22');
   const [quickTime, setQuickTime] = useState('19:00');
   const [quickGuests, setQuickGuests] = useState('4');
@@ -416,6 +417,11 @@ export default function LandingPage({ setActivePage }) {
         </div>
 
       </section>
+
+      {/* ========================================================================= */}
+      {/* 2.5 ABOUT US: WHO WE ARE, WHAT WE DO, HOW WE DO IT & 4x4 FOOD CATALOG    */}
+      {/* ========================================================================= */}
+      <AboutSection onOpenDish={onOpenDish} setActivePage={setActivePage} />
 
       {/* ========================================================================= */}
       {/* 3. GRAND VISUAL SUITE: ARAK BAR & THE COURTYARD (50/50 CHECKERBOARD SPLIT) */}
