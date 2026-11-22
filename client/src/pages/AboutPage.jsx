@@ -72,8 +72,40 @@ export default function AboutPage({ setActivePage }) {
   };
 
   return (
-    <div className="w-full min-h-screen bg-[#FAF8F5] text-obsidian-950 relative overflow-hidden pt-32 pb-32">
+    <div className="w-full min-h-screen bg-[#FAF8F5] text-obsidian-950 relative overflow-hidden pb-32">
       
+      {/* ========================================================================= */}
+      {/* 1. HERO BANNER: FULL-WIDTH ATMOSPHERIC HEADER (VINOLIVA STYLE)             */}
+      {/* ========================================================================= */}
+      <section className="relative w-full h-[52vh] min-h-[420px] max-h-[560px] flex flex-col justify-end overflow-hidden bg-obsidian-950">
+        
+        {/* Full-bleed background image with dark atmospheric exposure */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/outdoor.jpg"
+            alt="Sunlit open-air courtyard with patio umbrellas and brick pavers at Banmanche"
+            className="w-full h-full object-cover object-[center_60%]"
+          />
+          {/* Top gradient for transparent navbar legibility */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/40 to-black/75" />
+          {/* Bottom & Left gradient for header contrast */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent" />
+        </div>
+
+        {/* Header Stack Inside the Picture (aligned left, matching Vinoliva reference) */}
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-10 lg:px-14 pb-12 sm:pb-16">
+          <div className="space-y-2 text-left">
+            <span className="font-mono text-xs sm:text-sm uppercase tracking-[0.25em] text-sand-200/90 font-medium block">
+              BANMANCHE – THE HIMALAYAN COURTYARD
+            </span>
+            <h1 className="font-display text-5xl sm:text-7xl font-bold tracking-tight text-white uppercase leading-none drop-shadow-sm">
+              ABOUT US
+            </h1>
+          </div>
+        </div>
+
+      </section>
+
       {/* ========================================================================= */}
       {/* MINIMAL BACKGROUND DESIGNS: HIMALAYAN CONTOURS & ARCHITECTURAL GRID       */}
       {/* ========================================================================= */}
@@ -92,71 +124,57 @@ export default function AboutPage({ setActivePage }) {
         </svg>
       </div>
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-10 lg:px-14 space-y-24 sm:space-y-32">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 sm:px-10 lg:px-14 pt-16 sm:pt-24 space-y-24 sm:space-y-32">
         
         {/* ========================================================================= */}
-        {/* 1. HERO OF ABOUT US: LEFT SIDE CONTENT, RIGHT SIDE SIDE-BY-SIDE PICTURE   */}
+        {/* 2. THE MOUNTAIN FIREKEEPER IN KATHMANDU: START STORY FROM THE MIDDLE      */}
         {/* ========================================================================= */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="max-w-3xl mx-auto text-center space-y-8">
           
-          {/* Left Side: Editorial Story & Origins */}
-          <div className="lg:col-span-7 space-y-6 sm:space-y-8 pr-0 lg:pr-4">
-            <h1 className="font-display text-4xl sm:text-6xl font-light text-obsidian-950 tracking-tight leading-[1.05]">
+          <div className="space-y-4">
+            <h2 className="font-display text-3xl sm:text-5xl font-light text-obsidian-950 tracking-tight leading-[1.12]">
               The Mountain Firekeeper in Kathmandu
-            </h1>
-
-            <div className="space-y-4 text-base sm:text-lg text-obsidian-700 leading-relaxed font-normal">
-              <p>
-                In high Himalayan lore, the <strong>Banmanche</strong> is the guardian of the ridge forests. When biting blizzards swept the mountain passes, salt traders, herders, and pilgrims searched for the Banmanche's glowing hearth—a welcoming fire that never went out, where travelers from distant valleys could thaw their hands, break bread, and find sanctuary.
-              </p>
-              <p>
-                We built Banmanche in Kathmandu to carry that exact hospitality forward. Tucked away on Kailashchaur Marg in Dhobichaur, just past Narayanhiti Palace, our courtyard is an open-air refuge shielded from city noise—a place where the warmth of cured firewood embers brings people together around honest mountain cooking.
-              </p>
-            </div>
-
-            {/* Architecture Details Row (No Overhead Indicators) */}
-            <div className="pt-6 border-t border-obsidian-200/80 grid grid-cols-3 gap-6 text-xs font-mono text-obsidian-600">
-              <div>
-                <strong className="block text-sm sm:text-base text-obsidian-950 font-sans font-medium">85 Seats</strong>
-                Courtyard, hearth & bar
-              </div>
-              <div>
-                <strong className="block text-sm sm:text-base text-obsidian-950 font-sans font-medium">Sal & Oak</strong>
-                Cured firewood embers
-              </div>
-              <div>
-                <strong className="block text-sm sm:text-base text-obsidian-950 font-sans font-medium">Dhobichaur</strong>
-                Uttar Dhoka, Lazimpat
-              </div>
-            </div>
+            </h2>
+            <div className="w-12 h-0.5 bg-terracotta-500 mx-auto" />
           </div>
 
-          {/* Right Side: Side-by-Side Architectural Picture */}
-          <div className="lg:col-span-5 relative group overflow-hidden rounded-2xl border border-obsidian-200/80 shadow-md aspect-[4/3] sm:aspect-[16/12] lg:aspect-[4/5] bg-sand-100">
-            <img
-              src="/outdoor.jpg"
-              alt="Sunlit open-air courtyard with patio umbrellas and brick pavers at Banmanche"
-              className="w-full h-full object-cover object-bottom group-hover:scale-105 transition-transform duration-700 ease-out"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
-            <div className="absolute bottom-4 left-4 right-4 text-white text-xs">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-sand-300 block">The Courtyard</span>
-              <p className="font-medium text-white/95 mt-0.5">Open-air stone dining terrace on Kailashchaur Marg</p>
+          <div className="space-y-5 text-base sm:text-lg text-obsidian-700 leading-relaxed font-normal text-center">
+            <p>
+              In high Himalayan lore, the <strong>Banmanche</strong> is the guardian of the ridge forests. When biting blizzards swept the mountain passes, salt traders, herders, and pilgrims searched for the Banmanche's glowing hearth—a welcoming fire that never went out, where travelers from distant valleys could thaw their hands, break bread, and find sanctuary.
+            </p>
+            <p>
+              We built Banmanche in Kathmandu to carry that exact hospitality forward. Tucked away on Kailashchaur Marg in Dhobichaur, just past Narayanhiti Palace, our courtyard is an open-air refuge shielded from city noise—a place where the warmth of cured firewood embers brings people together around honest mountain cooking.
+            </p>
+          </div>
+
+          {/* Architecture Details Row (Centered) */}
+          <div className="pt-8 border-t border-obsidian-200/80 max-w-2xl mx-auto grid grid-cols-3 gap-6 text-center text-xs font-mono text-obsidian-600">
+            <div>
+              <strong className="block text-sm sm:text-base text-obsidian-950 font-sans font-medium">85 Seats</strong>
+              Courtyard, hearth & bar
+            </div>
+            <div>
+              <strong className="block text-sm sm:text-base text-obsidian-950 font-sans font-medium">Sal & Oak</strong>
+              Cured firewood embers
+            </div>
+            <div>
+              <strong className="block text-sm sm:text-base text-obsidian-950 font-sans font-medium">Dhobichaur</strong>
+              Uttar Dhoka, Lazimpat
             </div>
           </div>
 
         </div>
 
         {/* ========================================================================= */}
-        {/* 2. CONTINUING THE STORY FROM THE MIDDLE                                   */}
+        {/* 3. CONTINUING THE STORY: FIVE MOUNTAIN FOODWAYS                           */}
         {/* ========================================================================= */}
-        <div className="max-w-3xl mx-auto text-center space-y-6 sm:space-y-8 pt-8 sm:pt-12">
+        <div className="max-w-3xl mx-auto text-center space-y-6 sm:space-y-8 pt-4">
           
-          <h2 className="font-display text-3xl sm:text-5xl font-light text-obsidian-950 tracking-tight leading-tight">
+          <h3 className="font-display text-2xl sm:text-4xl font-light text-obsidian-950 tracking-tight leading-tight">
             Gathering Five Mountain Foodways Under One Sky
-          </h2>
+          </h3>
 
-          <div className="space-y-4 text-base sm:text-lg text-obsidian-700 leading-relaxed font-normal text-left sm:text-center">
+          <div className="space-y-4 text-base sm:text-lg text-obsidian-700 leading-relaxed font-normal text-center">
             <p>
               The Himalayan mountain arc stretches thousands of kilometers across Nepal, Tibet, Bhutan, and the tribal hill ranges of Nagaland and Meghalaya. Separated by peaks and rivers, these highland cultures share an elemental way of cooking: slow braising over hardwood coals, preservation through smoking and fermentation, and food shared family-style around an open fire.
             </p>
