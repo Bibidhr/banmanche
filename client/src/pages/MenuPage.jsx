@@ -1,18 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
 import { Sparkles, Utensils, Eye } from 'lucide-react';
 
 export default function MenuPage({ onOpenDish, tray = [], onAddToTray, setActivePage }) {
   const [hoveredDish, setHoveredDish] = useState(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const leaveTimeoutRef = useRef(null);
+
+  // High performance GPU-accelerated cursor tracking
+  const mouseX = useMotionValue(-500);
+  const mouseY = useMotionValue(-500);
+  const springX = useSpring(mouseX, { stiffness: 450, damping: 32, mass: 0.4 });
+  const springY = useSpring(mouseY, { stiffness: 450, damping: 32, mass: 0.4 });
 
   useEffect(() => {
     const handleMouseMove = (e) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
+      const clampedX = Math.min(e.clientX + 24, window.innerWidth - 290);
+      const clampedY = Math.min(Math.max(e.clientY - 130, 80), window.innerHeight - 350);
+      mouseX.set(clampedX);
+      mouseY.set(clampedY);
     };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (leaveTimeoutRef.current) clearTimeout(leaveTimeoutRef.current);
+    };
+  }, [mouseX, mouseY]);
+
+  const handleMouseEnter = (dish) => {
+    if (leaveTimeoutRef.current) {
+      clearTimeout(leaveTimeoutRef.current);
+      leaveTimeoutRef.current = null;
+    }
+    setHoveredDish(dish);
+  };
+
+  const handleMouseLeave = () => {
+    if (leaveTimeoutRef.current) clearTimeout(leaveTimeoutRef.current);
+    leaveTimeoutRef.current = setTimeout(() => {
+      setHoveredDish(null);
+    }, 130);
+  };
 
   // Complete authentic menu with high-resolution food catalog imagery
   const starters = [
@@ -347,16 +375,12 @@ export default function MenuPage({ onOpenDish, tray = [], onAddToTray, setActive
 
   // Minimalist Chéz Caroline menu item: Name + Price with floating on-hover image preview
   const renderItem = (dish) => (
-    <motion.div 
+    <div 
       key={dish.id} 
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-      onMouseEnter={() => setHoveredDish(dish)}
-      onMouseLeave={() => setHoveredDish(null)}
+      onMouseEnter={() => handleMouseEnter(dish)}
+      onMouseLeave={handleMouseLeave}
       onClick={() => onOpenDish && onOpenDish(dish)}
-      className="group relative py-3 px-3.5 rounded-xl hover:bg-black/[0.03] transition-all cursor-pointer flex items-baseline justify-between gap-4 border-b border-obsidian-200/50"
+      className="group relative py-3 px-3.5 rounded-xl hover:bg-black/[0.03] transition-colors cursor-pointer flex items-baseline justify-between gap-4 border-b border-obsidian-200/50"
     >
       <div className="flex items-baseline gap-2.5 min-w-0">
         <span className="font-menu text-xl sm:text-2xl text-obsidian-950 font-normal tracking-tight group-hover:text-terracotta-600 transition-colors truncate">
@@ -372,36 +396,39 @@ export default function MenuPage({ onOpenDish, tray = [], onAddToTray, setActive
           — Rs.{dish.price.toLocaleString()}
         </span>
       </div>
-    </motion.div>
+    </div>
   );
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] pt-32 pb-32 px-6 sm:px-10 lg:px-14 text-obsidian-950 relative">
       
       {/* ========================================================================= */}
-      {/* FLOATING CURSOR IMAGE PREVIEW ON HOVER                                    */}
+      {/* FLOATING CURSOR IMAGE PREVIEW ON HOVER (SMOOTH HARDWARE ACCELERATED)       */}
       {/* ========================================================================= */}
       <AnimatePresence>
         {hoveredDish && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 10 }}
-            animate={{ 
-              opacity: 1, 
-              scale: 1,
-              x: Math.min(mousePos.x + 28, window.innerWidth - 300),
-              y: Math.min(Math.max(mousePos.y - 140, 80), window.innerHeight - 340)
-            }}
-            exit={{ opacity: 0, scale: 0.9, y: 10 }}
-            transition={{ type: "spring", stiffness: 400, damping: 28 }}
-            className="fixed pointer-events-none z-50 hidden lg:flex flex-col bg-white p-3.5 rounded-2xl shadow-2xl border border-obsidian-200/80 w-64"
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.92 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
+            style={{ x: springX, y: springY }}
+            className="fixed top-0 left-0 pointer-events-none z-50 hidden lg:flex flex-col bg-white p-3.5 rounded-2xl shadow-2xl border border-obsidian-200/80 w-64 will-change-transform"
           >
-            {/* White blended image */}
-            <div className="w-full aspect-square rounded-xl bg-white overflow-hidden flex items-center justify-center p-2 mb-2">
-              <img 
-                src={hoveredDish.image} 
-                alt={hoveredDish.name} 
-                className="w-full h-full object-contain"
-              />
+            {/* White blended image with smooth cross-fade transition */}
+            <div className="w-full aspect-square rounded-xl bg-white overflow-hidden flex items-center justify-center p-2 mb-2 relative">
+              <AnimatePresence mode="wait">
+                <motion.img 
+                  key={hoveredDish.image} 
+                  src={hoveredDish.image} 
+                  alt={hoveredDish.name} 
+                  initial={{ opacity: 0.25, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0.25, scale: 0.96 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  className="w-full h-full object-contain absolute inset-0 p-2"
+                />
+              </AnimatePresence>
             </div>
             
             <div className="text-center w-full px-1 space-y-1">
@@ -429,122 +456,86 @@ export default function MenuPage({ onOpenDish, tray = [], onAddToTray, setActive
         )}
       </AnimatePresence>
 
-      <div className="w-full max-w-6xl mx-auto space-y-16">
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.45, ease: "easeOut" }}
+        className="w-full max-w-6xl mx-auto space-y-16"
+      >
         
         {/* ========================================================================= */}
         {/* CHÉZ CAROLINE HEADER: JUST 'MENU' & 'ALL RATES ARE TAX INCLUDED'          */}
         {/* ========================================================================= */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center space-y-2 pb-6 border-b border-obsidian-200/60"
-        >
+        <div className="text-center space-y-2 pb-6 border-b border-obsidian-200/60">
           <h1 className="font-menu text-4xl sm:text-6xl font-normal text-obsidian-950 tracking-tight">
             Menu
           </h1>
           <p className="text-xs sm:text-sm font-sans text-obsidian-500 font-normal tracking-wide">
             All rates are Tax included • Hover over any item to view its plate
           </p>
-        </motion.div>
+        </div>
 
         {/* 1. STARTERS */}
-        <motion.section
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="space-y-6"
-        >
+        <section className="space-y-6">
           <h2 className="font-menu text-2xl sm:text-3xl font-normal text-terracotta-600 text-center tracking-wide">
             Starters
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-2.5">
             {starters.map(renderItem)}
           </div>
-        </motion.section>
+        </section>
 
         {/* 2. MAIN COURSES */}
-        <motion.section
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="space-y-6"
-        >
+        <section className="space-y-6">
           <h2 className="font-menu text-2xl sm:text-3xl font-normal text-terracotta-600 text-center tracking-wide">
             Main Courses
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-2.5">
             {mainCourses.map(renderItem)}
           </div>
-        </motion.section>
+        </section>
 
         {/* 3. DESSERTS */}
-        <motion.section
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="space-y-6"
-        >
+        <section className="space-y-6">
           <h2 className="font-menu text-2xl sm:text-3xl font-normal text-terracotta-600 text-center tracking-wide">
             Desserts
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-2.5">
             {desserts.map(renderItem)}
           </div>
-        </motion.section>
+        </section>
 
         {/* 4. COCKTAILS */}
-        <motion.section
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="space-y-6"
-        >
+        <section className="space-y-6">
           <h2 className="font-menu text-2xl sm:text-3xl font-normal text-terracotta-600 text-center tracking-wide">
             Crafted Cocktails & Arak Spirits
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-2.5">
             {cocktails.map(renderItem)}
           </div>
-        </motion.section>
+        </section>
 
         {/* 5. TEAS */}
-        <motion.section
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="space-y-6"
-        >
+        <section className="space-y-6">
           <h2 className="font-menu text-2xl sm:text-3xl font-normal text-terracotta-600 text-center tracking-wide">
             Mountain Teas & Infusions
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-2.5">
             {teas.map(renderItem)}
           </div>
-        </motion.section>
+        </section>
 
         {/* 6. WINES */}
-        <motion.section
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="space-y-6"
-        >
+        <section className="space-y-6">
           <h2 className="font-menu text-2xl sm:text-3xl font-normal text-terracotta-600 text-center tracking-wide">
             Wines & Bubbles
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-2.5">
             {wines.map(renderItem)}
           </div>
-        </motion.section>
+        </section>
 
-      </div>
+      </motion.div>
     </div>
   );
 }

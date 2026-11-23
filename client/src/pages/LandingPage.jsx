@@ -170,9 +170,9 @@ export default function LandingPage({ setActivePage, onOpenDish, onAddToTray, me
 
             {/* 4. CTA Button */}
             <motion.div
-              initial={{ opacity: 0, y: 14 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.56, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, delay: 0.52, ease: [0.16, 1, 0.3, 1] }}
               className="pt-2 sm:pt-4"
             >
               <button
@@ -188,9 +188,9 @@ export default function LandingPage({ setActivePage, onOpenDish, onAddToTray, me
 
         {/* Factual bottom bar: Full width matching navbar */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.7, ease: "easeOut" }}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.62, ease: [0.16, 1, 0.3, 1] }}
           className="relative z-10 w-full px-6 sm:px-10 lg:px-14"
         >
           <div className="pt-6 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-xs sm:text-sm text-sand-300 text-left">
