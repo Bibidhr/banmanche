@@ -471,7 +471,7 @@ export default function MenuPage({ onOpenDish, tray = [], onAddToTray, setActive
             Menu
           </h1>
           <p className="text-xs sm:text-sm font-sans text-obsidian-500 font-normal tracking-wide">
-            All rates are Tax included • Hover over any item to view its plate
+            All rates are Tax included
           </p>
         </div>
 
