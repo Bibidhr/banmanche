@@ -9,6 +9,7 @@ export default function GalleryPage({ onOpenLightbox, setActivePage }) {
       title: "The Open-Air Courtyard",
       caption: "Sunlit brick terrace, natural patio umbrella canopy, and peaceful outdoor dining in Dhobichaur.",
       imageUrl: "/outdoor.jpg",
+      category: "Courtyard & Atmosphere",
       aspectRatio: "aspect-[4/3]",
       colSpan: "col-span-1 lg:col-span-7"
     },
@@ -17,6 +18,7 @@ export default function GalleryPage({ onOpenLightbox, setActivePage }) {
       title: "The Carved Newari Torana",
       caption: "Hand-carved timber gateway draped in ceremonial white silk khada scarves at the entrance on Kailashchaur Marg.",
       imageUrl: "/banmanche-entrance.jpg",
+      category: "Architecture & Heritage",
       aspectRatio: "aspect-[4/5] sm:aspect-[4/3] lg:aspect-[4/5]",
       colSpan: "col-span-1 lg:col-span-5"
     },
@@ -25,6 +27,7 @@ export default function GalleryPage({ onOpenLightbox, setActivePage }) {
       title: "The Teak Arak Bar",
       caption: "Solid reclaimed mountain teak counter where herbal infusions, lapsi sours, and mountain distillates are poured.",
       imageUrl: "/hero-bar-clean.jpg",
+      category: "Arak Bar & Drinks",
       aspectRatio: "aspect-[4/3]",
       colSpan: "col-span-1 lg:col-span-6"
     },
@@ -33,6 +36,7 @@ export default function GalleryPage({ onOpenLightbox, setActivePage }) {
       title: "Woodfire Hearth & Iron Braises",
       caption: "Cured sal and oak hardwood embers simmering bone broths and slow-braised Naga pork in heavy cast iron pans.",
       imageUrl: "/himalayan-feast.jpg",
+      category: "Fire & Hearth Feasts",
       aspectRatio: "aspect-[4/3]",
       colSpan: "col-span-1 lg:col-span-6"
     },
@@ -41,6 +45,7 @@ export default function GalleryPage({ onOpenLightbox, setActivePage }) {
       title: "Ambient Courtyard Nights",
       caption: "Warm evening festoon lights, glowing fire pits, and quiet conversation under Kathmandu's night sky.",
       imageUrl: "/banmanche-night-garden.jpg",
+      category: "Courtyard & Atmosphere",
       aspectRatio: "aspect-[16/10]",
       colSpan: "col-span-1 lg:col-span-8"
     },
@@ -49,6 +54,7 @@ export default function GalleryPage({ onOpenLightbox, setActivePage }) {
       title: "Hand-Steamed Tingmo Baskets",
       caption: "Handmade spiral Himalayan buns lifted steaming hot from traditional woven bamboo baskets.",
       imageUrl: "/himalayan-tingmo.jpg",
+      category: "Culinary Craft",
       aspectRatio: "aspect-square lg:aspect-[4/5]",
       colSpan: "col-span-1 lg:col-span-4"
     },
@@ -57,6 +63,7 @@ export default function GalleryPage({ onOpenLightbox, setActivePage }) {
       title: "Twilight by the Fireplace",
       caption: "The gentle transition from golden mountain twilight to deep fireside warmth in the courtyard.",
       imageUrl: "/hero-twilight.jpg",
+      category: "Courtyard & Atmosphere",
       aspectRatio: "aspect-[4/3]",
       colSpan: "col-span-1 lg:col-span-6"
     },
@@ -65,6 +72,7 @@ export default function GalleryPage({ onOpenLightbox, setActivePage }) {
       title: "Cocktail Craft & Highland Botanicals",
       caption: "Artisanal Arak cocktails shaken with charred mountain pine, timmur peppers, and wild clover honey.",
       imageUrl: "/hero-bar-16x9.jpg",
+      category: "Arak Bar & Drinks",
       aspectRatio: "aspect-[4/3]",
       colSpan: "col-span-1 lg:col-span-6"
     }

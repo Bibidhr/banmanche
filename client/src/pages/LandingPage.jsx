@@ -486,15 +486,28 @@ export default function LandingPage({ setActivePage, onOpenDish, onAddToTray, me
             <h2 className="font-sans font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-white uppercase leading-[0.95]">
               THE<br />COURTYARD
             </h2>
+            <div className="pt-6 sm:pt-8">
+              <button
+                onClick={() => { setActivePage('gallery'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full border border-white/25 text-xs font-semibold uppercase tracking-widest text-sand-100 hover:text-white hover:border-white hover:bg-white/10 transition-all cursor-pointer active:scale-[0.97]"
+              >
+                <span>View Photo Gallery</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
           </motion.div>
 
           {/* Right: Full-bleed Outdoor Courtyard Photo */}
-          <div className="order-1 lg:order-2 relative w-full h-[400px] sm:h-[500px] lg:h-full min-h-[400px] sm:min-h-[500px] overflow-hidden select-none bg-black">
+          <div 
+            onClick={() => { setActivePage('gallery'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            className="order-1 lg:order-2 relative w-full h-[400px] sm:h-[500px] lg:h-full min-h-[400px] sm:min-h-[500px] overflow-hidden select-none bg-black cursor-pointer group"
+          >
             <img
               src="/outdoor.jpg"
               alt="The Outdoor Courtyard at Banmanche"
-              className="w-full h-full object-cover object-bottom"
+              className="w-full h-full object-cover object-bottom group-hover:scale-105 transition-transform duration-700 ease-out"
             />
+            <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
           </div>
 
         </div>

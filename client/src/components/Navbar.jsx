@@ -32,6 +32,7 @@ export default function Navbar({ activePage, setActivePage, trayCount = 0 }) {
   const navLinks = [
     { id: 'home', label: 'Home' },
     { id: 'menu', label: 'Menu' },
+    { id: 'gallery', label: 'Gallery' },
     { id: 'about', label: 'About Us' }
   ];
 
