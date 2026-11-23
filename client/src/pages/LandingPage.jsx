@@ -129,9 +129,9 @@ export default function LandingPage({ setActivePage, onOpenDish, onAddToTray, me
             initial={{ scale: 1.08, opacity: 0.6 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full h-full object-cover object-[center_40%]"
+            className="w-full h-full object-cover object-[center_85%]"
           />
-          <div className="absolute inset-0 bg-petrol-950/75" />
+          <div className="absolute inset-0 bg-petrol-950/70" />
         </div>
 
         {/* Hero Content: Full-width alignment matching navbar */}
