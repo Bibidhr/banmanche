@@ -111,22 +111,6 @@ export default function AboutPage({ setActivePage }) {
             </p>
           </div>
 
-          {/* Architecture Details Row (Centered with Tri-Color Accents) */}
-          <div className="pt-8 border-t border-obsidian-200/80 max-w-2xl mx-auto grid grid-cols-3 gap-6 text-center text-xs font-mono text-obsidian-600">
-            <div className="border-t-2 border-tricolor-orange pt-3">
-              <strong className="block text-sm sm:text-base text-obsidian-950 font-sans font-medium">85 Seats</strong>
-              Courtyard, hearth & bar
-            </div>
-            <div className="border-t-2 border-tricolor-grey pt-3">
-              <strong className="block text-sm sm:text-base text-obsidian-950 font-sans font-medium">Sal & Oak</strong>
-              Cured firewood embers
-            </div>
-            <div className="border-t-2 border-tricolor-charcoal pt-3">
-              <strong className="block text-sm sm:text-base text-obsidian-950 font-sans font-medium">Dhobichaur</strong>
-              Uttar Dhoka, Lazimpat
-            </div>
-          </div>
-
         </div>
 
         {/* ========================================================================= */}

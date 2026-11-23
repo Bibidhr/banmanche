@@ -67,22 +67,6 @@ export default function AboutSection({ setActivePage }) {
                 We built Banmanche in Lazimpat to carry that exact spirit forward. Set inside a secluded open-air stone courtyard on Kailashchaur Marg, just off Uttar Dhoka, our space is an elemental refuge—where the warmth of cured firewood embers brings people together around honest mountain cooking.
               </p>
             </div>
-
-            {/* Architecture Details Row */}
-            <div className="pt-6 border-t border-obsidian-200/80 grid grid-cols-3 gap-6 text-xs font-mono text-obsidian-600">
-              <div>
-                <strong className="block text-sm sm:text-base text-obsidian-950 font-sans font-medium">85 Seats</strong>
-                Courtyard, hearth & bar
-              </div>
-              <div>
-                <strong className="block text-sm sm:text-base text-obsidian-950 font-sans font-medium">Sal & Oak</strong>
-                Cured firewood embers
-              </div>
-              <div>
-                <strong className="block text-sm sm:text-base text-obsidian-950 font-sans font-medium">Dhobichaur</strong>
-                Uttar Dhoka, Lazimpat
-              </div>
-            </div>
           </div>
 
           {/* Right Side: Side-by-Side Architectural Picture */}
