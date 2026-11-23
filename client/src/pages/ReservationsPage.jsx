@@ -93,14 +93,17 @@ export default function ReservationsPage({ tray, onClearTray }) {
     return (
       <div className="w-full pt-28 pb-24 px-6 sm:px-10 lg:px-14 text-obsidian-900">
         <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           className="border border-obsidian-200 rounded-md p-8 sm:p-10 bg-white space-y-6 max-w-2xl mx-auto shadow-sm"
         >
           
-          <div className="border-b border-obsidian-200 pb-6 space-y-2">
-            <span className="font-mono text-xs text-terracotta-600">Table Confirmed</span>
+          <div className="border-b border-obsidian-200 pb-6 space-y-3">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-mono font-medium animate-success-pulse border border-emerald-200">
+              <Check className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Table Confirmed</span>
+            </div>
             <h1 className="font-display text-3xl font-light text-obsidian-950">
               Reservation Details
             </h1>

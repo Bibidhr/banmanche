@@ -374,13 +374,16 @@ export default function MenuPage({ onOpenDish, tray = [], onAddToTray, setActive
   ];
 
   // Minimalist Chéz Caroline menu item: Name + Price with floating on-hover image preview
-  const renderItem = (dish) => (
-    <div 
+  const renderItem = (dish, idx = 0) => (
+    <motion.div 
       key={dish.id} 
+      initial={{ opacity: 0, y: 6 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.24, delay: idx * 0.03, ease: "easeOut" }}
       onMouseEnter={() => handleMouseEnter(dish)}
       onMouseLeave={handleMouseLeave}
       onClick={() => onOpenDish && onOpenDish(dish)}
-      className="group relative py-3 px-3.5 rounded-xl hover:bg-black/[0.03] transition-colors cursor-pointer flex items-baseline justify-between gap-4 border-b border-obsidian-200/50"
+      className="group relative py-3 px-3.5 rounded-xl hover:bg-black/[0.03] transition-colors cursor-pointer flex items-baseline justify-between gap-4 border-b border-obsidian-200/50 active:scale-[0.97]"
     >
       <div className="flex items-baseline gap-2.5 min-w-0">
         <span className="font-menu text-xl sm:text-2xl text-obsidian-950 font-normal tracking-tight group-hover:text-terracotta-600 transition-colors truncate">
@@ -396,7 +399,7 @@ export default function MenuPage({ onOpenDish, tray = [], onAddToTray, setActive
           — Rs.{dish.price.toLocaleString()}
         </span>
       </div>
-    </div>
+    </motion.div>
   );
 
   return (
@@ -408,9 +411,9 @@ export default function MenuPage({ onOpenDish, tray = [], onAddToTray, setActive
       <AnimatePresence>
         {hoveredDish && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.92 }}
+            exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.14, ease: "easeIn" } }}
             transition={{ duration: 0.18, ease: "easeOut" }}
             style={{ x: springX, y: springY }}
             className="fixed top-0 left-0 pointer-events-none z-50 hidden lg:flex flex-col bg-white p-3.5 rounded-2xl shadow-2xl border border-obsidian-200/80 w-64 will-change-transform"
@@ -481,7 +484,7 @@ export default function MenuPage({ onOpenDish, tray = [], onAddToTray, setActive
             Starters
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-2.5">
-            {starters.map(renderItem)}
+            {starters.map((dish, i) => renderItem(dish, i))}
           </div>
         </section>
 
@@ -491,7 +494,7 @@ export default function MenuPage({ onOpenDish, tray = [], onAddToTray, setActive
             Main Courses
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-2.5">
-            {mainCourses.map(renderItem)}
+            {mainCourses.map((dish, i) => renderItem(dish, i))}
           </div>
         </section>
 
@@ -501,7 +504,7 @@ export default function MenuPage({ onOpenDish, tray = [], onAddToTray, setActive
             Desserts
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-2.5">
-            {desserts.map(renderItem)}
+            {desserts.map((dish, i) => renderItem(dish, i))}
           </div>
         </section>
 
@@ -511,7 +514,7 @@ export default function MenuPage({ onOpenDish, tray = [], onAddToTray, setActive
             Crafted Cocktails & Arak Spirits
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-2.5">
-            {cocktails.map(renderItem)}
+            {cocktails.map((dish, i) => renderItem(dish, i))}
           </div>
         </section>
 
@@ -521,7 +524,7 @@ export default function MenuPage({ onOpenDish, tray = [], onAddToTray, setActive
             Mountain Teas & Infusions
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-2.5">
-            {teas.map(renderItem)}
+            {teas.map((dish, i) => renderItem(dish, i))}
           </div>
         </section>
 
@@ -531,7 +534,7 @@ export default function MenuPage({ onOpenDish, tray = [], onAddToTray, setActive
             Wines & Bubbles
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-2.5">
-            {wines.map(renderItem)}
+            {wines.map((dish, i) => renderItem(dish, i))}
           </div>
         </section>
 

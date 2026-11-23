@@ -8,6 +8,25 @@
   }
 }
 
+/* Universal Tactile Button Motion (Scale to 0.97 on press) */
+button:not(:disabled):active,
+[role="button"]:not(:disabled):active,
+a[role="button"]:not(:disabled):active {
+  transform: scale(0.97);
+  transition: transform 100ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Success Confirmation Pulse */
+@keyframes success-pulse {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+.animate-success-pulse {
+  animation: success-pulse 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 /* Glassmorphism custom utilities for minimal white theme */
 .glass-panel {
   background: rgba(255, 255, 255, 0.88);

@@ -1,21 +1,30 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { X, ZoomIn, MapPin } from 'lucide-react';
 
 export default function LightboxModal({ item, onClose }) {
   if (!item) return null;
 
   return (
-    <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200"
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.16, ease: "easeIn" } }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md"
       onClick={onClose}
     >
-      <div 
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.17, ease: [0.16, 1, 0.3, 1] } }}
+        transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
         className="relative max-w-4xl w-full bg-white border border-black/10 rounded-3xl overflow-hidden shadow-2xl text-obsidian-950"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/90 text-obsidian-700 hover:text-white hover:bg-ochre-600 border border-black/10 transition-colors focus:outline-none shadow-xs"
+          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/90 text-obsidian-700 hover:text-white hover:bg-ochre-600 border border-black/10 transition-colors focus:outline-none shadow-xs active:scale-[0.97]"
         >
           <X className="w-5 h-5" />
         </button>
@@ -47,7 +56,7 @@ export default function LightboxModal({ item, onClose }) {
             {item.caption || item.description}
           </p>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

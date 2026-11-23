@@ -455,9 +455,9 @@ export default function HimalayanDrinksMap({ onAddToTray }) {
                   <button
                     type="button"
                     onClick={(e) => handleAdd(activeDrink, e)}
-                    className={`w-full py-2.5 px-3 rounded-xl text-xs uppercase tracking-wider font-semibold transition-all flex items-center justify-center gap-2 shadow-xs active:scale-98 ${
+                    className={`w-full py-2.5 px-3 rounded-xl text-xs uppercase tracking-wider font-semibold transition-all flex items-center justify-center gap-2 shadow-xs active:scale-[0.97] ${
                       addedId === activeDrink.id
-                        ? 'bg-emerald-600 text-white'
+                        ? 'bg-emerald-600 text-white animate-success-pulse'
                         : 'bg-ochre-500 hover:bg-ochre-600 text-white'
                     }`}
                   >

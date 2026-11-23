@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Menu, X, ArrowUpRight } from 'lucide-react';
 
 export default function Navbar({ activePage, setActivePage, trayCount = 0 }) {
@@ -93,20 +93,31 @@ export default function Navbar({ activePage, setActivePage, trayCount = 0 }) {
                   <button
                     key={link.id}
                     onClick={() => handleNavClick(link.id)}
-                    className={`relative px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-200 cursor-pointer ${
+                    className={`relative px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-colors duration-200 cursor-pointer active:scale-[0.97] ${
                       isActive
-                        ? isTransparentHero ? 'text-white bg-terracotta-500 shadow-sm' : 'text-white bg-ochre-500 shadow-sm'
-                        : isTransparentHero ? 'text-sand-200 hover:text-white hover:bg-white/15' : 'text-obsidian-700 hover:text-ochre-600 hover:bg-white/80'
+                        ? 'text-white'
+                        : isTransparentHero ? 'text-sand-200 hover:text-white' : 'text-obsidian-700 hover:text-ochre-600'
                     }`}
                   >
-                    {link.label}
-                    {link.id === 'menu' && trayCount > 0 && (
-                      <span className={`ml-1.5 px-1.5 py-0.2 text-[9px] font-bold rounded-full ${
-                        isTransparentHero ? 'bg-white/25 text-white' : 'bg-obsidian-900 text-white'
-                      }`}>
-                        {trayCount}
-                      </span>
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeNavPill"
+                        className={`absolute inset-0 rounded-full shadow-sm z-0 ${
+                          isTransparentHero ? 'bg-terracotta-500' : 'bg-ochre-500'
+                        }`}
+                        transition={{ type: "tween", duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                      />
                     )}
+                    <span className="relative z-10 flex items-center">
+                      {link.label}
+                      {link.id === 'menu' && trayCount > 0 && (
+                        <span className={`ml-1.5 px-1.5 py-0.2 text-[9px] font-bold rounded-full ${
+                          isTransparentHero ? 'bg-white/25 text-white' : 'bg-obsidian-900 text-white'
+                        }`}>
+                          {trayCount}
+                        </span>
+                      )}
+                    </span>
                   </button>
                 );
               })}
@@ -116,14 +127,17 @@ export default function Navbar({ activePage, setActivePage, trayCount = 0 }) {
             <div className="md:hidden flex items-center">
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className={`p-2 rounded-xl border focus:outline-none transition-colors ${
+                className={`p-2 rounded-xl border focus:outline-none transition-colors active:scale-[0.97] relative ${
                   isTransparentHero
                     ? 'bg-black/35 text-sand-100 border-white/20 backdrop-blur-md hover:bg-black/50'
                     : 'bg-sand-100 text-obsidian-800 border-black/5'
                 }`}
                 aria-label="Toggle menu"
               >
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                <span className="relative flex items-center justify-center w-5 h-5">
+                  <X className={`w-5 h-5 transition-all duration-200 ${mobileMenuOpen ? 'opacity-100 scale-100 blur-0 rotate-0' : 'opacity-0 scale-75 blur-[2px] -rotate-90 absolute'}`} />
+                  <Menu className={`w-5 h-5 transition-all duration-200 ${!mobileMenuOpen ? 'opacity-100 scale-100 blur-0 rotate-0' : 'opacity-0 scale-75 blur-[2px] rotate-90 absolute'}`} />
+                </span>
               </button>
             </div>
           </div>
@@ -132,58 +146,67 @@ export default function Navbar({ activePage, setActivePage, trayCount = 0 }) {
       </div>
 
       {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div className={`md:hidden mt-3 mx-4 p-5 rounded-2xl backdrop-blur-2xl shadow-xl animate-in fade-in slide-in-from-top-4 duration-200 border ${
-          isTransparentHero
-            ? 'bg-petrol-950/95 border-white/15 text-white'
-            : 'bg-white/95 border-black/10'
-        }`}>
-          <div className="flex flex-col gap-1.5">
-            {navLinks.map((link) => {
-              const isActive = activePage === link.id;
-              return (
-                <button
-                  key={link.id}
-                  onClick={() => handleNavClick(link.id)}
-                  className={`flex items-center justify-between p-3 rounded-xl text-left transition-all ${
-                    isActive
-                      ? (isTransparentHero ? 'bg-terracotta-500 text-white font-semibold' : 'bg-ochre-500 text-white font-semibold')
-                      : (isTransparentHero ? 'text-sand-200 hover:bg-white/10' : 'text-obsidian-800 hover:bg-sand-100')
-                  }`}
-                >
-                  <span className="text-sm tracking-wide font-medium">{link.label}</span>
-                  {link.id === 'menu' && trayCount > 0 && (
-                    <span className={`px-2 py-0.5 text-[10px] font-bold rounded-full ${
-                      isTransparentHero ? 'bg-white/20 text-white' : 'bg-sand-200 text-obsidian-900'
-                    }`}>
-                      {trayCount} selected
-                    </span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95, y: -6 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: -6, transition: { duration: 0.16, ease: "easeIn" } }}
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            style={{ transformOrigin: 'top right' }}
+            className={`md:hidden mt-3 mx-4 p-5 rounded-2xl backdrop-blur-2xl shadow-xl border ${
+              isTransparentHero
+                ? 'bg-petrol-950/95 border-white/15 text-white'
+                : 'bg-white/95 border-black/10'
+            }`}
+          >
+            <div className="flex flex-col gap-1.5">
+              {navLinks.map((link) => {
+                const isActive = activePage === link.id;
+                return (
+                  <button
+                    key={link.id}
+                    onClick={() => handleNavClick(link.id)}
+                    className={`flex items-center justify-between p-3 rounded-xl text-left transition-all active:scale-[0.97] ${
+                      isActive
+                        ? (isTransparentHero ? 'bg-terracotta-500 text-white font-semibold' : 'bg-ochre-500 text-white font-semibold')
+                        : (isTransparentHero ? 'text-sand-200 hover:bg-white/10' : 'text-obsidian-800 hover:bg-sand-100')
+                    }`}
+                  >
+                    <span className="text-sm tracking-wide font-medium">{link.label}</span>
+                    {link.id === 'menu' && trayCount > 0 && (
+                      <span className={`px-2 py-0.5 text-[10px] font-bold rounded-full ${
+                        isTransparentHero ? 'bg-white/20 text-white' : 'bg-sand-200 text-obsidian-900'
+                      }`}>
+                        {trayCount} selected
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
 
-          <div className={`mt-4 pt-4 border-t flex flex-col gap-2 ${
-            isTransparentHero ? 'border-white/10' : 'border-black/5'
-          }`}>
-            <button
-              onClick={() => handleNavClick('reservations')}
-              className={`w-full py-3 rounded-xl text-center text-xs font-semibold uppercase tracking-wider text-white shadow-md flex items-center justify-center gap-2 ${
-                isTransparentHero ? 'bg-terracotta-500 hover:bg-terracotta-600' : 'bg-ochre-500 hover:bg-ochre-600'
-              }`}
-            >
-              <Calendar className="w-3.5 h-3.5" />
-              <span>Book Courtyard Table</span>
-            </button>
-            <p className={`text-center text-[10px] mt-1 ${
-              isTransparentHero ? 'text-sand-400' : 'text-obsidian-500'
+            <div className={`mt-4 pt-4 border-t flex flex-col gap-2 ${
+              isTransparentHero ? 'border-white/10' : 'border-black/5'
             }`}>
-              Kailashchaur Marg, Dhobichaur, Kathmandu
-            </p>
-          </div>
-        </div>
-      )}
+              <button
+                onClick={() => handleNavClick('reservations')}
+                className={`w-full py-3 rounded-xl text-center text-xs font-semibold uppercase tracking-wider text-white shadow-md flex items-center justify-center gap-2 active:scale-[0.97] ${
+                  isTransparentHero ? 'bg-terracotta-500 hover:bg-terracotta-600' : 'bg-ochre-500 hover:bg-ochre-600'
+                }`}
+              >
+                <Calendar className="w-3.5 h-3.5" />
+                <span>Book Courtyard Table</span>
+              </button>
+              <p className={`text-center text-[10px] mt-1 ${
+                isTransparentHero ? 'text-sand-400' : 'text-obsidian-500'
+              }`}>
+                Kailashchaur Marg, Dhobichaur, Kathmandu
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
