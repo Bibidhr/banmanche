@@ -38,12 +38,12 @@ export default function AboutPage({ setActivePage }) {
       {/* ========================================================================= */}
       <section className="relative w-full h-[50vh] sm:h-[54vh] min-h-[440px] max-h-[580px] flex flex-col justify-end overflow-hidden bg-obsidian-950">
         
-        {/* Full-bleed background image featuring the architectural tri-color textured wall */}
+        {/* Full-bleed background image using hero.jpg */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/about-hero-wall.jpg"
-            alt="Signature tri-color textured wall with water curtain and warm cove lighting at Banmanche"
-            className="w-full h-full object-cover object-center"
+            src="/hero.jpg"
+            alt="Courtyard dining at Banmanche"
+            className="w-full h-full object-cover object-[center_45%]"
           />
           {/* Subtle top scrim for transparent navbar legibility */}
           <div className="absolute top-0 left-0 right-0 h-36 bg-gradient-to-b from-black/80 via-black/30 to-transparent pointer-events-none" />
