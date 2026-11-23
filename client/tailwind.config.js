@@ -56,18 +56,30 @@ export default {
           800: '#1A374A', // Borders & hover highlights
           700: '#234B62',
         },
-        // 6. Authentic BANMANCHE Logo Terracotta Red-Orange
+        // 6. Authentic BANMANCHE Logo & Courtyard Wall Terracotta
         terracotta: {
           50: '#FDF6F3',
           100: '#FBEDE7',
           200: '#F7D7CB',
           300: '#F2B7A2',
-          400: '#F27A50',
-          500: '#ED5E2D', // Exact Logo Color (#ED5E2D)
-          600: '#DB4E1E',
-          700: '#B83E15',
-          800: '#943212',
-          900: '#7A2A10',
+          400: '#DF7B52',
+          500: '#BC643C', // Wall Terracotta Orange Midtone (#BC643C)
+          600: '#A8522C',
+          700: '#862B07', // Wall Terracotta Shadow (#862B07)
+          800: '#6E2207',
+          900: '#521904',
+        },
+        // 7. Architectural Tri-Color (From Courtyard Wall Feature)
+        tricolor: {
+          orange: '#BC643C',
+          orangeLight: '#EE9A70',
+          orangeDark: '#862B07',
+          grey: '#B0B3AC',
+          greyLight: '#E2E5DF',
+          greyDark: '#787B74',
+          charcoal: '#474D45',
+          charcoalDark: '#181D16',
+          amber: '#DBAF4E',
         }
       },
       fontFamily: {

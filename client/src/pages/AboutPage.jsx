@@ -94,7 +94,12 @@ export default function AboutPage({ setActivePage }) {
             <h2 className="font-display text-3xl sm:text-5xl font-light text-obsidian-950 tracking-tight leading-[1.12]">
               The Mountain Firekeeper in Kathmandu
             </h2>
-            <div className="w-12 h-0.5 bg-terracotta-500 mx-auto" />
+            {/* Signature Tri-Color Architectural Stripe Motif */}
+            <div className="flex items-center justify-center gap-2 mx-auto pt-1">
+              <span className="w-8 h-1 rounded-full bg-tricolor-orange" title="Terracotta (#BC643C)" />
+              <span className="w-8 h-1 rounded-full bg-tricolor-grey" title="Mineral Silver (#B0B3AC)" />
+              <span className="w-8 h-1 rounded-full bg-tricolor-charcoal" title="Slate Charcoal (#474D45)" />
+            </div>
           </div>
 
           <div className="space-y-5 text-base sm:text-lg text-obsidian-700 leading-relaxed font-normal text-center">
@@ -106,17 +111,17 @@ export default function AboutPage({ setActivePage }) {
             </p>
           </div>
 
-          {/* Architecture Details Row (Centered) */}
+          {/* Architecture Details Row (Centered with Tri-Color Accents) */}
           <div className="pt-8 border-t border-obsidian-200/80 max-w-2xl mx-auto grid grid-cols-3 gap-6 text-center text-xs font-mono text-obsidian-600">
-            <div>
+            <div className="border-t-2 border-tricolor-orange pt-3">
               <strong className="block text-sm sm:text-base text-obsidian-950 font-sans font-medium">85 Seats</strong>
               Courtyard, hearth & bar
             </div>
-            <div>
+            <div className="border-t-2 border-tricolor-grey pt-3">
               <strong className="block text-sm sm:text-base text-obsidian-950 font-sans font-medium">Sal & Oak</strong>
               Cured firewood embers
             </div>
-            <div>
+            <div className="border-t-2 border-tricolor-charcoal pt-3">
               <strong className="block text-sm sm:text-base text-obsidian-950 font-sans font-medium">Dhobichaur</strong>
               Uttar Dhoka, Lazimpat
             </div>
@@ -144,11 +149,11 @@ export default function AboutPage({ setActivePage }) {
 
           <div className="pt-4 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm font-menu text-obsidian-800">
             <span>Nagaland Smoked Pork</span>
-            <span className="text-terracotta-500">•</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-tricolor-orange inline-block" />
             <span>Bhutanese Ema Datshi</span>
-            <span className="text-terracotta-500">•</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-tricolor-grey inline-block" />
             <span>Tibetan Tingmo & Mokthuk</span>
-            <span className="text-terracotta-500">•</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-tricolor-charcoal inline-block" />
             <span>Kathmandu Hearth Sekuwa</span>
           </div>
 
