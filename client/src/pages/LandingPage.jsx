@@ -216,15 +216,15 @@ export default function LandingPage({ setActivePage, onOpenDish, onAddToTray, me
       {/* ========================================================================= */}
       <section className="w-full relative pt-16 sm:pt-20 pb-24 sm:pb-28 px-0 bg-[#FCFAF7] text-obsidian-950 overflow-hidden border-b border-obsidian-200/80">
         
-        {/* Real Himalayan Mountain Background Image */}
+        {/* Real Himalayan Mountain Background Image - Visible from the very start of the section */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
           <img
-            src="/himalayas-panorama.jpg"
-            alt="Himalayan Mountain Range"
-            className="w-full h-full object-cover object-bottom opacity-[0.35] filter grayscale contrast-125"
+            src="/himalayas-bg.jpg"
+            alt="Himalayan Mountain Range Peaks"
+            className="w-full h-full object-cover object-[center_top] opacity-[0.55] contrast-105 saturate-90"
           />
-          {/* Subtle warm wash ensuring pristine readability and pure white atmosphere */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#FCFAF7] via-[#FCFAF7]/50 to-[#FCFAF7]" />
+          {/* Gentle atmospheric wash keeping mountain peaks crisp from the top while ensuring card readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#FCFAF7]/15 via-[#FCFAF7]/40 to-[#FCFAF7]/85" />
         </div>
 
         {/* Section Header */}
