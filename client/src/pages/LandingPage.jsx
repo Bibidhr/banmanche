@@ -124,8 +124,8 @@ export default function LandingPage({ setActivePage, onOpenDish, onAddToTray, me
         {/* Full-bleed background image with clear, dark architectural exposure */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <motion.img
-            src="/hero-bar.jpg"
-            alt="Courtyard and arak bar in Kathmandu"
+            src="/hero.jpg"
+            alt="Courtyard dining at Banmanche"
             initial={{ scale: 1.08, opacity: 0.6 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}

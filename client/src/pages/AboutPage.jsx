@@ -38,11 +38,11 @@ export default function AboutPage({ setActivePage }) {
       {/* ========================================================================= */}
       <section className="relative w-full h-[50vh] sm:h-[54vh] min-h-[440px] max-h-[580px] flex flex-col justify-end overflow-hidden bg-obsidian-950">
         
-        {/* Full-bleed background image using hero.jpg */}
+        {/* Full-bleed background image using outdoor.jpg */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/hero.jpg"
-            alt="Courtyard dining at Banmanche"
+            src="/outdoor.jpg"
+            alt="Sunlit open-air courtyard with patio umbrellas and brick pavers at Banmanche"
             className="w-full h-full object-cover object-[center_45%]"
           />
           {/* Subtle top scrim for transparent navbar legibility */}
